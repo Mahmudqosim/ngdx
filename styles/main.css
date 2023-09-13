@@ -66,10 +66,12 @@ img {
   align-items: center;
   margin-top: 5rem;
 }
-.header .ngdx-ngd {
+
+.ngdx-ngd {
   width: 15rem;
 }
-.header .ngdx-liftoff {
+
+.ngdx-liftoff {
   width: 20rem;
 }
 
@@ -195,4 +197,29 @@ input:checked + .slider:before {
   width: fit-content;
   padding: 0.5rem;
   color: #fff;
+}
+
+@media screen and (max-width: 600px) {
+  .ngdx-ngd {
+    width: 10rem;
+  }
+  .ngdx-liftoff {
+    width: 15rem;
+  }
+}
+@media screen and (max-width: 600px) {
+  .ngdx-ngd {
+    width: 10rem;
+  }
+  .ngdx-liftoff {
+    width: 15rem;
+  }
+}
+@media screen and (max-width: 300px) {
+  .ngdx-ngd {
+    width: 5rem;
+  }
+  .ngdx-liftoff {
+    width: 10rem;
+  }
 }/*# sourceMappingURL=main.css.map */

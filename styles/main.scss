@@ -37,9 +37,9 @@ p {
 }
 
 h1 {
-    font-family: 'Space Grotesk';
-    color: white;
-    font-size: clamp(3rem, 10vw, 10rem);
+  font-family: "Space Grotesk";
+  color: white;
+  font-size: clamp(3rem, 10vw, 10rem);
 }
 
 button,
@@ -49,7 +49,7 @@ input {
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 canvas {
@@ -75,14 +75,14 @@ img {
   flex-direction: column;
   align-items: center;
   margin-top: 5rem;
+}
 
-  & .ngdx-ngd {
-    width: 15rem;
-  }
+.ngdx-ngd {
+  width: 15rem;
+}
 
-  & .ngdx-liftoff {
-    width: 20rem;
-  }
+.ngdx-liftoff {
+  width: 20rem;
 }
 
 input[type="file"] {
@@ -208,13 +208,41 @@ input:checked + .slider:before {
     padding: 1rem;
 
     & a {
-        font-weight: 600;
-        background: #23454f;
-        width: fit-content;
-        padding: .5rem;
-        color: #fff;
-
+      font-weight: 600;
+      background: #23454f;
+      width: fit-content;
+      padding: 0.5rem;
+      color: #fff;
     }
   }
 }
 
+@media screen and (max-width: 600px) {
+  .ngdx-ngd {
+    width: 10rem;
+  }
+
+  .ngdx-liftoff {
+    width: 15rem;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .ngdx-ngd {
+    width: 10rem;
+  }
+
+  .ngdx-liftoff {
+    width: 15rem;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .ngdx-ngd {
+    width: 5rem;
+  }
+
+  .ngdx-liftoff {
+    width: 10rem;
+  }
+}
