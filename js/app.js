@@ -1,5 +1,15 @@
+WebFont.load({
+  google: {
+    families: ["Plus Jakarta Sans", "Space Grotesk"],
+  },
+  active: function () {
+    console.log("Fonts are active!")
+  },
+})
+
 const form = document.getElementById("app-form")
 const imagesContainer = document.getElementById("images")
+const imagesDummy = document.getElementById("nothing")
 const canvas = document.getElementById("canvas")
 const resizeCanvas = document.getElementById("resizer-canvas")
 const fileInput = document.getElementById("image-upload")
@@ -154,6 +164,7 @@ function cropImage() {
   const cropImg = new Image()
 
   let sourceX, sourceY
+  let sourceWidth, sourceHeight
 
   cropImg.src = resizeCanvas.toDataURL()
 
@@ -168,8 +179,19 @@ function cropImage() {
     sourceY = 0
   }
 
-  const sourceWidth = IMAGE_WIDTH
-  const sourceHeight = IMAGE_HEIGHT
+  if (Math.abs(activeImage.width - activeImage.height) < 133) {
+    sourceWidth = cropImgHeight * (457 / 590)
+    sourceHeight = cropImgHeight
+
+    sourceX = (cropImgWidth - sourceWidth) / 2
+    sourceY = 0
+  } else {
+    sourceWidth = IMAGE_WIDTH
+    sourceHeight = IMAGE_HEIGHT
+  }
+
+  // const sourceWidth = IMAGE_WIDTH
+  // const sourceHeight = IMAGE_HEIGHT
   const destWidth = IMAGE_WIDTH
   const destHeight = IMAGE_HEIGHT
   const destX = 90
@@ -199,7 +221,7 @@ function addText(mode) {
     return
   }
 
-  context.font = "32px Space Grotesk"
+  context.font = "bold 32px Space Grotesk"
   context.fillStyle = "#fff"
   context.textAlign = "center"
   context.fillText(
@@ -229,5 +251,5 @@ async function saveFile() {
   div.appendChild(img)
   div.appendChild(downloadEl)
 
-  imagesContainer.appendChild(div)
+  imagesDummy.insertAdjacentElement("afterend", div)
 }
