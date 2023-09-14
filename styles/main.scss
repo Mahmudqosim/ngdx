@@ -261,6 +261,10 @@ input:checked + .slider:before {
   }
 }
 
+.trackeet {
+  width: 12rem;
+}
+
 @media screen and (max-width: 600px) {
   .checkbox {
     font-size: 0.75rem;
