@@ -16,18 +16,19 @@ const fileInput = document.getElementById("image-upload")
 const modeCheck = document.getElementById("mode-check")
 
 const displayNameInput = document.querySelector(".display-name")
+const instagramInput = document.querySelector(".instagram_handle_input")
 
 const context = canvas.getContext("2d")
 const resizeContext = resizeCanvas.getContext("2d")
 
 const imgLight = new Image()
-imgLight.src = "./images/NGDX_LIGHT.png"
+imgLight.src = "./images/VENDOR-FRAME.png"
 
 const imgDark = new Image()
-imgDark.src = "./images/NGDX_DARK.png"
+imgDark.src = "./images/ATTENDEE-FRAME.png"
 
-const IMAGE_WIDTH = 457
-const IMAGE_HEIGHT = 590
+const IMAGE_WIDTH = 425.25 // 567
+const IMAGE_HEIGHT = 465 // 633
 const MAX_NAME_LENGTH = 21
 
 let MODE_DARK = false
@@ -39,6 +40,8 @@ let cropImgHeight, cropImgWidth
 let activeImage, originalWidthToHeightRatio
 
 modeCheck.addEventListener("change", () => {
+  document.body.classList.toggle("attendee")
+
   MODE_DARK = modeCheck.checked
 })
 
@@ -47,7 +50,7 @@ form.addEventListener("submit", (e) => {
 
   if (displayNameInput.value.trim().length < 3) {
     new Toast({
-      message: "Name characters length should be more than 3 abeg.",
+      message: "Name characters length should be more than 3.",
       type: "danger",
     })
 
@@ -95,9 +98,9 @@ function drawImage(mode) {
 
   console.log(img)
 
-  const DIV_PERCENT = 0.3
-  canvas.height = 3544 * DIV_PERCENT
-  canvas.width = 3544 * DIV_PERCENT
+  const DIV_PERCENT = 0.75
+  canvas.height = 2048 * DIV_PERCENT
+  canvas.width = 1639 * DIV_PERCENT
 
   context.fillStyle = "#FFF"
   context.fillRect(0, 0, canvas.width, canvas.height)
@@ -127,10 +130,39 @@ function openImage(imageSrc) {
   activeImage.src = imageSrc
 }
 
+function roundedImage(ctx, x, y, width, height, radius) {
+  ctx.beginPath()
+  ctx.moveTo(x + radius, y)
+  ctx.lineTo(x + width - radius, y)
+  ctx.quadraticCurveTo(x + width, y, x + width, y + radius)
+  ctx.lineTo(x + width, y + height - radius)
+  ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height)
+  ctx.lineTo(x + radius, y + height)
+  ctx.quadraticCurveTo(x, y + height, x, y + height - radius)
+  ctx.lineTo(x, y + radius)
+  ctx.quadraticCurveTo(x, y, x + radius, y)
+  ctx.closePath()
+}
+
+function drawRoundedRect(ctx, x, y, width, height, radius) {
+  ctx.beginPath()
+  ctx.moveTo(x + radius, y)
+  ctx.lineTo(x + width - radius, y)
+  ctx.quadraticCurveTo(x + width, y, x + width, y + radius)
+  ctx.lineTo(x + width, y + height - radius)
+  ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height)
+  ctx.lineTo(x + radius, y + height)
+  ctx.quadraticCurveTo(x, y + height, x, y + height - radius)
+  ctx.lineTo(x, y + radius)
+  ctx.quadraticCurveTo(x, y, x + radius, y)
+  ctx.closePath()
+  ctx.clip()
+}
+
 function resize() {
   if (activeImage) {
     context.fillStyle = "white"
-    context.fillRect(90, 238, 457, 590)
+    context.fillRect(141, 820, IMAGE_WIDTH, IMAGE_HEIGHT)
   }
 
   let heightValue, widthValue
@@ -148,6 +180,12 @@ function resize() {
 
   resizeCanvas.width = widthValue
   resizeCanvas.height = heightValue
+
+  const radius = 10
+  const x = 0
+  const y = 0
+  const width = Math.floor(widthValue)
+  const height = Math.floor(heightValue)
 
   resizeContext.drawImage(
     activeImage,
@@ -180,7 +218,7 @@ function cropImage() {
   }
 
   if (Math.abs(activeImage.width - activeImage.height) < 133) {
-    sourceWidth = cropImgHeight * (457 / 590)
+    sourceWidth = cropImgHeight * (IMAGE_WIDTH / IMAGE_HEIGHT)
     sourceHeight = cropImgHeight
 
     sourceX = (cropImgWidth - sourceWidth) / 2
@@ -194,10 +232,15 @@ function cropImage() {
   // const sourceHeight = IMAGE_HEIGHT
   const destWidth = IMAGE_WIDTH
   const destHeight = IMAGE_HEIGHT
-  const destX = 90
-  const destY = 238
+  const destX = 141
+  const destY = 820
+
+  drawRoundedRect(context, destX, destY, destWidth, destHeight, 50)
+
 
   cropImg.onload = () => {
+    // drawRoundedRect(context, 0, 0, destWidth, destHeight, 20);
+
     context.drawImage(
       cropImg,
       sourceX,
@@ -214,22 +257,29 @@ function cropImage() {
 }
 
 function addText(mode) {
-  context.fillStyle = mode ? "#23454f" : "#45b175"
-  context.fillRect(548, 506, 410, 64)
-
   if (displayNameInput.value.trim().length < 3) {
-    return
+    return;
   }
 
-  context.font = "bold 32px Space Grotesk"
-  context.fillStyle = "#fff"
-  context.textAlign = "center"
-  context.fillText(
-    displayNameInput.value.trim().substring(0, 21),
-    755,
-    canvas.height / 2 + 20
-  )
+  context.save(); // Save current state
+  context.font = "bold 42px Space Grotesk";
+  context.fillStyle = "#0F2F3A";
+  context.textAlign = "left";
+  context.fillText(displayNameInput.value.trim().substring(0, 18), 630, 1240);
+  context.restore(); // Restore previous state
+
+  if (!mode && instagramInput.value.trim().length > 3) {
+    console.log(instagramInput.value.trim())
+    context.save(); // Save current state
+    context.font = "italic 34px Plus Jakarta Sans";
+    context.fillStyle = "#0F2F3A";
+    context.textAlign = "center";
+    context.fillText(instagramInput.value.trim().substring(0, 18), 350, 1370);
+    context.restore(); // Restore previous state
+  }
 }
+
+
 
 async function saveFile() {
   const div = document.createElement("div")

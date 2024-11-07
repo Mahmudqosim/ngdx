@@ -3,7 +3,10 @@ $color-secondary: #a3c516;
 $color-text: #23454f;
 $color-accent: #1ed8c6;
 $font-color: #fff;
-$bg-color: #f0f3f5;
+$bg-color: #F7F9E9;
+$form-color: #990099;
+$button-color: #3EC03E;
+$switch-color: #FF7B50;
 
 * {
   box-sizing: border-box;
@@ -12,11 +15,35 @@ $bg-color: #f0f3f5;
 body {
   font-family: "Plus Jakarta Sans", "Segoe UI", Roboto, Oxygen, Ubuntu,
     Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  background: $bg-color;
+  background: $bg-color url('../images/pattern.svg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   margin: 0;
   padding: 0;
 
   padding-bottom: 3rem;
+
+  overflow-x: hidden;
+
+  &.attendee {
+
+    & #app-form {
+      background: #FF7B50 !important;
+
+      & button[type="submit"] {
+        background-color: #990099;
+      }
+    }
+
+    & .slider::before {
+      background-color: #3EC03E;
+    }
+
+    & .instagram_handle {
+      display: none;
+    }
+  }
 }
 
 button {
@@ -38,6 +65,8 @@ h1 {
   font-family: "Space Grotesk";
   color: white;
   font-size: clamp(3rem, 10vw, 10rem);
+  margin: 0;
+  padding: 0;
 }
 
 button,
@@ -61,7 +90,7 @@ canvas {
   align-items: center;
   gap: 3rem;
   padding: 2rem;
-  width: 100%;
+  // width: 100%;
   max-width: 550px;
   margin: 0 auto;
 }
@@ -82,10 +111,10 @@ img {
   gap: 1.5rem;
   align-items: center;
   margin-top: 5rem;
-}
 
-.ngdx-ngd {
-  width: 100%;
+  img {
+    width: 240px;
+  }
 }
 
 input[type="file"] {
@@ -93,15 +122,18 @@ input[type="file"] {
 }
 
 .file-upload {
-  background: $color-primary;
+  background: #FFF;
+  color: $color-text;
+  text-transform: uppercase;
+  font-weight: bold;
   display: inline-flex;
   gap: 0.5rem;
   align-items: center;
   justify-content: center;
   padding: 0.75rem 2rem;
-  font-weight: 500;
-  border-radius: 5px;
+  border-radius: 50px;
   cursor: pointer;
+  font-family: 'Space Grotesk', sans-serif;
 
   & svg {
     width: 1rem;
@@ -129,7 +161,7 @@ input[type="file"] {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
+  background-color: #fff;
   -webkit-transition: 0.4s;
   transition: 0.4s;
 
@@ -140,7 +172,7 @@ input[type="file"] {
     width: 26px;
     left: 4px;
     bottom: 4px;
-    background-color: white;
+    background-color: $switch-color;
     transition: 0.4s;
   }
 
@@ -154,11 +186,11 @@ input[type="file"] {
 }
 
 input:checked + .slider {
-  background-color: $color-primary;
+  background-color: #fff;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px $color-primary;
+  box-shadow: 0 0 1px #fff;
 }
 
 input:checked + .slider:before {
@@ -174,28 +206,54 @@ input:checked + .slider:before {
 }
 
 #app-form {
+  position: relative;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 2rem;
-  background: $color-text;
-  padding: 2.5rem;
+  background: $form-color;
+  padding: 4rem 3rem;
   color: $font-color;
   border-radius: 10px;
 
-  & button[type="submit"] {
-    background: #9dcb56;
-    color: $color-text;
+  & button[type="submit"], & label[type="submit"] {
+    background: $button-color;
+    color: #FFF;
     text-transform: uppercase;
-    font-weight: 700;
+    font-weight: bold;
     display: inline-flex;
     gap: 0.5rem;
     align-items: center;
     justify-content: center;
     padding: 0.75rem 2rem;
-    border-radius: 5px;
+    border-radius: 50px;
     cursor: pointer;
+  font-family: 'Space Grotesk', sans-serif;
+
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    background: url('../images/flower-background.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    top: -10%;
+    width: 170%;
+    height: 170%;
+    z-index: -1;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    background: #fff;
+    top: -2.5%;
+    width: 107%;
+    height: 105%;
+    border-radius: 10px;
+    z-index: -2;
   }
 }
 
@@ -216,10 +274,10 @@ input:checked + .slider:before {
   font-weight: 600;
   padding: 1rem 1.5rem;
   border: 1px solid $font-color;
-  border-radius: 5px;
+  border-radius: 50px;
 }
 
-.name {
+.text_input {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -229,13 +287,24 @@ input:checked + .slider:before {
   & input {
     padding: 0.75rem 1rem;
     width: 100%;
-    border-radius: 5px;
+    border-radius: 50px;
     border: none;
     text-align: center;
 
     &::placeholder {
       text-align: center;
+      font-style: italic;
     }
+  }
+}
+
+.event_date {
+  display: flex;
+  flex-direction: column;
+  & .event_month {
+    font-size: 3rem !important;
+    letter-spacing: 1px;
+    font-family: 'Bebas Neue Pro';
   }
 }
 
