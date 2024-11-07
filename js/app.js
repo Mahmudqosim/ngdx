@@ -293,7 +293,7 @@ async function saveFile() {
 
   downloadEl.textContent = "Download Image"
 
-  const filename = `NGDX_${new Date().toISOString()}.png`
+  const filename = `TBTF_${new Date().toISOString()}.png`
 
   downloadEl.download = filename
   downloadEl.href = canvas.toDataURL()
