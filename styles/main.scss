@@ -3,10 +3,10 @@ $color-secondary: #a3c516;
 $color-text: #23454f;
 $color-accent: #1ed8c6;
 $font-color: #fff;
-$bg-color: #F7F9E9;
+$bg-color: #f7f9e9;
 $form-color: #990099;
-$button-color: #3EC03E;
-$switch-color: #FF7B50;
+$button-color: #3ec03e;
+$switch-color: #ff7b50;
 
 * {
   box-sizing: border-box;
@@ -15,7 +15,7 @@ $switch-color: #FF7B50;
 body {
   font-family: "Plus Jakarta Sans", "Segoe UI", Roboto, Oxygen, Ubuntu,
     Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  background: $bg-color url('../images/pattern.svg');
+  background: $bg-color url("../images/pattern.svg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -27,9 +27,8 @@ body {
   overflow-x: hidden;
 
   &.attendee {
-
     & #app-form {
-      background: #FF7B50 !important;
+      background: #ff7b50 !important;
 
       & button[type="submit"] {
         background-color: #990099;
@@ -37,7 +36,7 @@ body {
     }
 
     & .slider::before {
-      background-color: #3EC03E;
+      background-color: #3ec03e;
     }
 
     & .instagram_handle {
@@ -93,6 +92,7 @@ canvas {
   // width: 100%;
   max-width: 550px;
   margin: 0 auto;
+  overflow-x: hidden;
 }
 
 img {
@@ -122,7 +122,7 @@ input[type="file"] {
 }
 
 .file-upload {
-  background: #FFF;
+  background: #fff;
   color: $color-text;
   text-transform: uppercase;
   font-weight: bold;
@@ -133,7 +133,7 @@ input[type="file"] {
   padding: 0.75rem 2rem;
   border-radius: 50px;
   cursor: pointer;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: "Space Grotesk", sans-serif;
 
   & svg {
     width: 1rem;
@@ -217,9 +217,10 @@ input:checked + .slider:before {
   color: $font-color;
   border-radius: 10px;
 
-  & button[type="submit"], & label[type="submit"] {
+  & button[type="submit"],
+  & label[type="submit"] {
     background: $button-color;
-    color: #FFF;
+    color: #fff;
     text-transform: uppercase;
     font-weight: bold;
     display: inline-flex;
@@ -229,14 +230,13 @@ input:checked + .slider:before {
     padding: 0.75rem 2rem;
     border-radius: 50px;
     cursor: pointer;
-  font-family: 'Space Grotesk', sans-serif;
-
+    font-family: "Space Grotesk", sans-serif;
   }
 
   &::before {
-    content: '';
+    content: "";
     position: absolute;
-    background: url('../images/flower-background.png');
+    background: url("../images/flower-background.png");
     background-size: contain;
     background-repeat: no-repeat;
     top: -10%;
@@ -246,7 +246,7 @@ input:checked + .slider:before {
   }
 
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     background: #fff;
     top: -2.5%;
@@ -283,6 +283,7 @@ input:checked + .slider:before {
   gap: 0.5rem;
   width: 100%;
   text-align: center;
+  font-size: 1rem;
 
   & input {
     padding: 0.75rem 1rem;
@@ -290,6 +291,7 @@ input:checked + .slider:before {
     border-radius: 50px;
     border: none;
     text-align: center;
+    font-size: 1rem;
 
     &::placeholder {
       text-align: center;
@@ -304,7 +306,7 @@ input:checked + .slider:before {
   & .event_month {
     font-size: 3rem !important;
     letter-spacing: 1px;
-    font-family: 'Bebas Neue Pro';
+    font-family: "Bebas Neue Pro";
   }
 }
 
@@ -347,9 +349,22 @@ input:checked + .slider:before {
   #app-form {
     padding: 2rem 1.5rem;
   }
+
+  .header img {
+    width: 180px;
+  }
+
   .checkbox {
     font-size: 0.65rem;
-    padding: .75rem;
+    padding: 0.75rem;
+  }
+
+  .text_input {
+    font-size: 0.8rem;
+
+    & input {
+      font-size: 0.8rem;
+    }
   }
 }
 @media screen and (max-width: 300px) {
